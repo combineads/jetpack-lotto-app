@@ -77,7 +77,7 @@ const App: React.FC = () => {
     }
 
     return newLottoSets;
-  }
+  };
 
   const runNormalAlgorithm = (availableNumbers: number[], requiredNumbers: number, lottoSetSize: number) => {
     let newLottoSets: number[][] = [];
@@ -118,8 +118,6 @@ const App: React.FC = () => {
   };
 
   const runGroupShuffleAlgorithm = (availableNumbers: number[], requiredNumbers: number, lottoSetSize: number): number[][] => {
-    let newLottoSets: number[][] = [];
-
     // Create Groups of 6 from availableNumbers
     const groups: number[][] = [];
     for (let i = 0; i < availableNumbers.length; i += 6) {
@@ -151,19 +149,17 @@ const App: React.FC = () => {
     };
 
     const flattenedArray = generateFlattenedArray(groups);
-    console.log('flattenedArray', flattenedArray);
     return runNormalAlgorithm(flattenedArray, requiredNumbers, lottoSetSize);
   };
 
   return (<Box display="flex" flexDirection="column" alignItems="center">
-    <Typography variant="h2" sx={{textTransform: 'uppercase', fontWeight: 600}}>
+    <Typography variant="h3" sx={{textTransform: 'uppercase', fontWeight: 600}}>
       Lotto App
     </Typography>
-    <Box width={500}>
+    <Box width="80vw" maxWidth="400px">
       <QrScanner
           onDecode={handleScan}
           onError={(error) => console.log(error?.message)}
-          scanDelay={1000}
       />
     </Box>
     <Box>
@@ -187,14 +183,14 @@ const App: React.FC = () => {
       </Button>
     </Box>
     {/* Scanned lotto numbers */}
-    {scanLottoData.length > 0 && <Typography variant="h4" sx={{mt: 5}}>
+    {scanLottoData.length > 0 && <Typography variant="h5" sx={{mt: 5}}>
       Scanned Lotto Numbers
     </Typography>}
     {scanLottoData.map((set, index) => (<Typography key={index} variant="body1">
       {set.join(', ')}
     </Typography>))}
     {/* Lucky numbers */}
-    {luckyNumbers.length > 0 && <Typography variant="h4" sx={{mt: 5}}>
+    {luckyNumbers.length > 0 && <Typography variant="h5" sx={{mt: 5}}>
       Lucky Numbers
     </Typography>}
     {luckyNumbers.length > 0 && <Typography variant="body1" sx={{ml: 15, mr: 15}}>
@@ -202,7 +198,7 @@ const App: React.FC = () => {
     </Typography>}
 
     {/* Recommended numbers */}
-    {recommendedLottoNumbers.length > 0 && <Typography variant="h4" sx={{mt: 5}}>
+    {recommendedLottoNumbers.length > 0 && <Typography variant="h5" sx={{mt: 5}}>
       Recommended Lotto Numbers
     </Typography>}
     {recommendedLottoNumbers.map((set, index) => (<Typography key={index} variant="body1">
