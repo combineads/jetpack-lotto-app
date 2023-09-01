@@ -1,8 +1,8 @@
 'use client';
 
 import React, {useState} from 'react';
-import {QrScanner} from '@yudiel/react-qr-scanner';
 import {Box, Button, FormControlLabel, Radio, RadioGroup, TextField, Typography} from '@mui/material';
+import Html5QrcodePlugin from '@/app/Html5QrcodePlugin';
 
 // Fisher-Yates (aka Knuth) Shuffle
 const shuffleArray = (array: number[]) => {
@@ -157,10 +157,11 @@ const App: React.FC = () => {
       Lotto App
     </Typography>
     <Box width="80vw" maxWidth="400px">
-      <QrScanner
-          onDecode={handleScan}
-          onError={(error) => console.log(error?.message)}
-      />
+      <Html5QrcodePlugin
+          fps={10}
+          qrbox={250}
+          disableFlip={false}
+          qrCodeSuccessCallback={handleScan}/>
     </Box>
     <Box>
       <RadioGroup row value={algorithm} onChange={(e) => setAlgorithm(e.target.value)}>
